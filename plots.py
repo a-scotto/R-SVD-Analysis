@@ -201,12 +201,12 @@ for which in norms:
         pyplot.legend()
 
         pyplot.savefig('OurBounds_' + which + '_rank' + str(k) + '.pdf', bbox_inches='tight')
+        pyplot.close()
 
     # Bounds as a function of k, for a fixed value p
     for p_max in [32, 102]:
         pyplot.figure()
 
-        p_max = 102
         k_axis = numpy.arange(1, p_max-1)
 
         step = p_max // 10
@@ -238,6 +238,7 @@ for which in norms:
         pyplot.legend()
 
         pyplot.savefig('Minimum_k_' + which + '_pMax' + str(p_max) + '.pdf', bbox_inches='tight')
+        pyplot.close()
 
     # Comparaison Single-Pass with Halko, Martinsson & Tropp
     for k, rank in settings:
@@ -275,6 +276,7 @@ for which in norms:
         pyplot.legend()
 
         pyplot.savefig('Comparison_HMT_' + which + '_rank' + str(k) + '.pdf', bbox_inches='tight')
+        pyplot.close()
 
     # Power-Scheme : comparison with Halko, Martinsson & Tropp for the spectral norm
     for k, rank in settings_power:
@@ -331,7 +333,6 @@ for which in norms:
         pyplot.legend()
 
         pyplot.savefig('PowerScheme_' + which + '_rank' + str(k) + '.pdf', bbox_inches='tight')
-
-    pyplot.close()
+        pyplot.close()
 
 # pyplot.show()
