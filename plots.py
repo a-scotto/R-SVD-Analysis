@@ -83,6 +83,11 @@ def CF_exp(sigma, choice, p, k, q):
 def phi(x):
     return x / sqrt(1 + x**2)
 
+def BT_Expectation(sigma, p, k):
+    target = sigma[k] if which == 'Spectral' else numpy.sum(sigma[k:]**2)**0.5
+
+    return (1 + sqrt(k * p / (p - k - 1))) * target
+
 def HMT_Expectation(sigma, p, k, q, which):
 
     target = sigma[k] if which == 'Spectral' else numpy.sum(sigma[k:]**2)**0.5
@@ -264,6 +269,12 @@ for which in norms:
             our_bound_enhanced = [Our_Expectation_OldMetric(sigma, p, k, 0, which) for p in p_th]
 
             pyplot.plot(p_th - k, our_bound_enhanced, label='Our improved bound', clip_on=False,
+                        ls=':', color='k', marker=markers[2], markevery=mark_every)
+
+        if which == 'Frobenius':
+            bt_bound = [BT_Expectation(sigma, p, k) for p in p_th]
+
+            pyplot.plot(p_th - k, bt_bound, label='BT bound', clip_on=False,
                         ls=':', color='k', marker=markers[2], markevery=mark_every)
 
         pyplot.yscale('log')
